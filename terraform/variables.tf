@@ -21,3 +21,8 @@ variable "tags" {
     "Terrafom"    = "true"
   }
 }
+
+variable "database_password" {
+  description = "The password for the database"
+  default = ""
+}

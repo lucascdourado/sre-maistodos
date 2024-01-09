@@ -13,8 +13,8 @@ metabase:
     targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 80
   db:
-    host: "seu-endpoint-do-rds"  # Substitua pelo endpoint real do seu RDS
-    port: 5432  # Substitua pela porta correta do seu RDS
-    name: "seu-nome-de-banco-de-dados"
-    user: "seu-usuario-do-banco"
-    password: "sua-senha-do-banco"
+    host: ""
+    port: 5432
+    name: "" # Substitua pelo nome do seu banco de dados
+    user: ""
+    password: ""

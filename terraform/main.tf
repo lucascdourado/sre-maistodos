@@ -61,11 +61,97 @@ module "route53" {
   depends_on = [module.node, module.cluster]
 }
 
+# Module for configuring the RDS database
+module "aurora" {
+  source = "./modules/rds"
+
+  vpc_id                     = module.network.vpc_id
+  cluster_identifier         = "metabase-${var.team}-${var.environment}"
+  engine                     = "aurora-postgresql"
+  engine_version             = "15.3"
+  database_name              = "metabase"
+  master_username            = "metabase"
+  db_subnet_group            = [module.network.public_subnets_id[0], module.network.public_subnets_id[1]]
+  cluster_instances_reader   = 1
+  publicly_accessible_reader = true
+  cluster_instances_writer   = 1
+  publicly_accessible_writer = true
+
+  db_password = {
+    length      = 16
+    special     = false
+    min_lower   = 1
+    min_upper   = 1
+    min_numeric = 1
+  }
+
+  ingress_rules = [
+    {
+      description = "Dourado"
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      cidr_blocks = ["177.92.50.8/32"]
+    },
+    {
+      description = "Public Subnets"
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      cidr_blocks = module.network.public_subnets_cidr_block
+    },
+    {
+      description = "Private Subnets"
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      cidr_blocks = module.network.private_subnets_cidr_block
+    },
+  ]
+
+  scale = {
+    max_capacity = 3
+    min_capacity = 1
+    target_value = 80
+    in_cooldown  = 300
+    out_cooldown = 300
+  }
+
+  tags = var.tags
+
+}
+
+
 # Module for configuring the Metabase application on Kubernetes
 resource "helm_release" "metabase" {
   name      = "metabase"
   chart     = "../helm/metabase"
   namespace = "maistodos"
 
-  depends_on = [module.node, module.cluster]
+  set {
+    name  = "metabase.db.host"
+    value = module.aurora.aurora_cluster_endpoint
+  }
+
+  set {
+    name  = "metabase.db.port"
+    value = module.aurora.aurora_cluster_port
+  }
+
+  set {
+    name  = "metabase.db.name"
+    value = module.aurora.database_name
+  }
+
+  set {
+    name  = "metabase.db.user"
+    value = module.aurora.database_username
+  }
+
+  set {
+    name  = "metabase.db.password"
+    value = var.database_password
+  }
+
+  depends_on = [module.node, module.cluster, module.aurora]
 }
