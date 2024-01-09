@@ -1,0 +1,18 @@
+# /helm/frontend-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.metabase.name }}-service
+  namespace: maistodos
+  labels:
+    app: {{ .Values.metabase.name }}
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /
+spec:
+  selector:
+    app: {{ .Values.metabase.name }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
