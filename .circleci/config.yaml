@@ -1,0 +1,45 @@
+version: 2.1
+executors:
+  terraform:
+    docker:
+      - image: hashicorp/terraform:0.12.24
+
+jobs:
+  plan:
+    executor: terraform
+    steps:
+      - checkout
+      - run:
+          name: Terraform Plan
+          command: |
+            terraform init
+            terraform plan
+
+  apply:
+    executor: terraform
+    steps:
+      - checkout
+      - run:
+          name: Terraform Apply
+          command: |
+            terraform init
+            terraform apply -auto-approve
+
+workflows:
+  version: 2
+  plan-approve-apply:
+    jobs:
+      - plan:
+          filters:
+            branches:
+              only: main
+      - approve:
+          type: approval
+          requires:
+            - plan
+      - apply:
+          requires:
+            - approve
+          filters:
+            branches:
+              only: main
