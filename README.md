@@ -46,7 +46,7 @@ When structuring your infrastructure and application projects, it's a recommende
 
 By following these practices, you can create a more modular, easily manageable, and collaborative development environment. This will result in a more efficient and sustainable implementation of your application.
 
-### Check out the documentation for each part – [Backend](./backend/README.md), [Frontend](./frontend/README.md), [Helm](./helm/README.md), and [Terraform](./terraform/README.md) – in their respective folders for detailed information.
+### Check out the documentation for each part – [Helm](./helm/README.md), and [Terraform](./terraform/README.md) – in their respective folders for detailed information.
 
 **Author: [Lucas Dourado](https://www.linkedin.com/in/lucascdourado/)**
 
