@@ -13,6 +13,6 @@ spec:
     app: {{ .Values.metabase.name }}
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: {{ .Values.metabase.service.port }}
+      targetPort: {{ .Values.metabase.service.port }}
   type: ClusterIP

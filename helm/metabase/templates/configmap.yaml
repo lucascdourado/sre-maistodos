@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metabase-config
+  namespace: maistodos
+data:
+  MB_DB_TYPE: {{ .Values.metabase.db.type }}
+  MB_DB_DBNAME: {{ .Values.metabase.db.name }}
+  MB_DB_PORT: "{{ .Values.metabase.db.port }}"
+  MB_DB_HOST: {{ .Values.metabase.db.host }}

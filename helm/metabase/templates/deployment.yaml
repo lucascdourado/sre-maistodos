@@ -19,6 +19,18 @@ spec:
       containers:
       - name: metabase
         image: "{{ .Values.metabase.image.repository }}:{{ .Values.metabase.image.tag }}"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/metabase
         ports:
-        - containerPort: 3000
+        - containerPort: {{ .Values.metabase.service.port }}
           name: http
+        envFrom:
+        - configMapRef:
+            name: metabase-config
+        - secretRef:
+            name: metabase-secrets
+      volumes:
+      - name: config-volume
+        configMap:
+          name: metabase-config

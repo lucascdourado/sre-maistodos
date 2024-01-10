@@ -42,7 +42,6 @@ module "node" {
 
   capacity_type = "SPOT"
   instance_type = "t3a.medium"
-  # instance_type = "t2.micro"
   desired_size  = 3
   min_size      = 1
   max_size      = 10
@@ -129,8 +128,13 @@ resource "helm_release" "metabase" {
   namespace = "maistodos"
 
   set {
+    name  = "metabase.db.type"
+    value = "postgres"
+  }
+
+  set {
     name  = "metabase.db.host"
-    value = module.aurora.aurora_cluster_endpoint
+    value = module.aurora.aurora_cluster_instance_writer_endpoint[0]
   }
 
   set {

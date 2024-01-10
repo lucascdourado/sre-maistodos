@@ -13,8 +13,9 @@ metabase:
     targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 80
   db:
+    type: ""
     host: ""
     port: 5432
-    name: "" # Substitua pelo nome do seu banco de dados
+    name: ""
     user: ""
     password: ""
