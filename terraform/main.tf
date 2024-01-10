@@ -86,13 +86,6 @@ module "aurora" {
 
   ingress_rules = [
     {
-      description = "Dourado"
-      from_port   = 5432
-      to_port     = 5432
-      protocol    = "tcp"
-      cidr_blocks = ["177.92.50.8/32"]
-    },
-    {
       description = "Public Subnets"
       from_port   = 5432
       to_port     = 5432
