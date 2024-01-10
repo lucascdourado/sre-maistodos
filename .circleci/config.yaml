@@ -12,6 +12,7 @@ jobs:
       - run:
           name: Terraform Plan
           command: |
+            export TF_VAR_database_password=$METABASE_DATABASE_PASSWORD
             terraform init
             terraform plan
 
@@ -22,6 +23,7 @@ jobs:
       - run:
           name: Terraform Apply
           command: |
+            export TF_VAR_database_password=$METABASE_DATABASE_PASSWORD
             terraform init
             terraform apply -auto-approve
 
