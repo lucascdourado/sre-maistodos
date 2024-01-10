@@ -53,7 +53,7 @@ module "node" {
 module "route53" {
   source = "./modules/route53"
 
-  domain_name = "maistodos.com"
+  domain_name = "maistodos.com.br"
   dns_name    = data.aws_lb.eks.dns_name
   region      = data.aws_lb_hosted_zone_id.eks.id
 
