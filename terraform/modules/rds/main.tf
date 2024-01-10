@@ -68,16 +68,20 @@ resource "aws_rds_cluster_endpoint" "this" {
 }
 
 resource "aws_rds_cluster_instance" "reader" {
-  count                      = var.cluster_instances_reader
-  identifier                 = "${var.cluster_identifier}-reader-${count.index}"
-  cluster_identifier         = aws_rds_cluster.this.id
-  instance_class             = var.instance_class
-  engine                     = var.engine
-  engine_version             = var.engine_version
-  db_subnet_group_name       = aws_db_subnet_group.this.name
-  apply_immediately          = var.apply_immediately
-  auto_minor_version_upgrade = var.allow_minor_version_upgrade
-  publicly_accessible        = var.publicly_accessible_reader
+  count                                 = var.cluster_instances_reader
+  identifier                            = "${var.cluster_identifier}-reader-${count.index}"
+  cluster_identifier                    = aws_rds_cluster.this.id
+  instance_class                        = var.instance_class
+  engine                                = var.engine
+  engine_version                        = var.engine_version
+  db_subnet_group_name                  = aws_db_subnet_group.this.name
+  apply_immediately                     = var.apply_immediately
+  auto_minor_version_upgrade            = var.allow_minor_version_upgrade
+  publicly_accessible                   = var.publicly_accessible_reader
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_kms_key_id       = aws_kms_key.this.key_id
+  performance_insights_retention_period = var.performance_insights_retention_period
+
 
   tags = merge({
     Name = "${var.cluster_identifier}-reader-${count.index}"
@@ -85,16 +89,19 @@ resource "aws_rds_cluster_instance" "reader" {
 }
 
 resource "aws_rds_cluster_instance" "writer" {
-  count                      = var.cluster_instances_writer
-  identifier                 = "${var.cluster_identifier}-writer-${count.index}"
-  cluster_identifier         = aws_rds_cluster.this.id
-  instance_class             = var.instance_class
-  engine                     = var.engine
-  engine_version             = var.engine_version
-  db_subnet_group_name       = aws_db_subnet_group.this.name
-  apply_immediately          = var.apply_immediately
-  auto_minor_version_upgrade = var.allow_minor_version_upgrade
-  publicly_accessible        = var.publicly_accessible_writer
+  count                                 = var.cluster_instances_writer
+  identifier                            = "${var.cluster_identifier}-writer-${count.index}"
+  cluster_identifier                    = aws_rds_cluster.this.id
+  instance_class                        = var.instance_class
+  engine                                = var.engine
+  engine_version                        = var.engine_version
+  db_subnet_group_name                  = aws_db_subnet_group.this.name
+  apply_immediately                     = var.apply_immediately
+  auto_minor_version_upgrade            = var.allow_minor_version_upgrade
+  publicly_accessible                   = var.publicly_accessible_writer
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_kms_key_id       = aws_kms_key.this.key_id
+  performance_insights_retention_period = var.performance_insights_retention_period
 
   tags = merge({
     Name = "${var.cluster_identifier}-writer-${count.index}"

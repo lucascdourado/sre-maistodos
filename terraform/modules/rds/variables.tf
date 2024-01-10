@@ -123,6 +123,18 @@ variable "publicly_accessible_reader" {
   type        = bool
 }
 
+variable "performance_insights_enabled" {
+  description = "Determines if performance insights is enabled"
+  type        = bool
+  default     = true
+}
+
+variable "performance_insights_retention_period" {
+  description = "The amount of time in days to retain Performance Insights data"
+  type        = number
+  default     = 7
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource"
   type        = map(string)
