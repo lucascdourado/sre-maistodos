@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Helm chart deploys an AWS Application Load Balancer (ALB) for Kubernetes, routing traffic to backend and frontend services.
+This Helm chart deploys an AWS Application Load Balancer (ALB) for Kubernetes, routing traffic to services.
 
 ## Installation
 
@@ -68,7 +68,7 @@ terraform destroy
 
 ## Example Usage
 
-For detailed configuration options, refer to the [Helm Chart](https://chat.openai.com/c/a4906ec1-bd10-48ba-a6b0-170e83c3d19a#) and [Terraform Provider for Helm documentation. Feel free to customize the values according to your specific requirements](https://github.com/hashicorp/terraform-provider-helm).
+For detailed configuration options, refer to the [Helm Chart](https://helm.sh/docs/topics/charts/) and [Terraform Provider for Helm documentation. Feel free to customize the values according to your specific requirements](https://github.com/hashicorp/terraform-provider-helm).
 
 For more details, refer to the [official Helm documentation](https://helm.sh/docs/) and [Terraform documentation](https://www.terraform.io/docs/index.html).
 

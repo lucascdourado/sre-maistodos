@@ -112,16 +112,18 @@ resource "aws_eks_addon" "kube-proxy" {
 
 // EKS vpc-cni add-on to enable networking between pods
 resource "aws_eks_addon" "vpc_cni" {
-  cluster_name = aws_eks_cluster.eks_cluster.name
-  addon_name   = "vpc-cni"
-  depends_on   = [aws_eks_cluster.eks_cluster]
+  cluster_name  = aws_eks_cluster.eks_cluster.name
+  addon_name    = "vpc-cni"
+  addon_version = "v1.16.0-eksbuild.1"
+  depends_on    = [aws_eks_cluster.eks_cluster]
 }
 
 // EKS CoreDNS add-on to enable DNS resolution
 resource "aws_eks_addon" "core_dns" {
-  cluster_name = aws_eks_cluster.eks_cluster.name
-  addon_name   = "coredns"
-  depends_on   = [aws_eks_cluster.eks_cluster]
+  cluster_name  = aws_eks_cluster.eks_cluster.name
+  addon_name    = "coredns"
+  addon_version = "v1.10.1-eksbuild.6"
+  depends_on    = [aws_eks_cluster.eks_cluster]
 }
 
 // EKS eks-pod-identity-agent add-on to enable IAM roles for service accounts
@@ -246,7 +248,7 @@ resource "helm_release" "metrics_server" {
     name  = "args"
     value = "{--kubelet-insecure-tls=true}"
   }
-    
+
   depends_on = [aws_eks_cluster.eks_cluster]
 }
 

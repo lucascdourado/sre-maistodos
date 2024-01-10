@@ -25,6 +25,10 @@ spec:
         ports:
         - containerPort: {{ .Values.metabase.service.port }}
           name: http
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
         envFrom:
         - configMapRef:
             name: metabase-config

@@ -13,6 +13,16 @@ output "private_subnets_id" {
   value       = aws_subnet.private_subnet.*.id
 }
 
+output "public_subnets_cidr_block" {
+  description = "The CIDR block list of the public subnet"
+  value       = aws_subnet.public_subnet.*.cidr_block
+}
+
+output "private_subnets_cidr_block" {
+  description = "The CIDR block list of the private subnet"
+  value       = aws_subnet.private_subnet.*.cidr_block
+}
+
 output "default_sg_id" {
   description = "The ID of the default security group"
   value       = aws_security_group.default.id

@@ -7,7 +7,7 @@ resource "aws_route53_zone" "this" {
 // This record is of type "A" and has an alias to the provided DNS name
 resource "aws_route53_record" "this" {
   zone_id = aws_route53_zone.this.zone_id
-  name    = "${var.domain_name}"
+  name    = var.domain_name
   type    = "A"
 
   alias {

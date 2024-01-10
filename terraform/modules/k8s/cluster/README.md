@@ -7,6 +7,10 @@
 - Additionally, it sets up an IAM role for the AWS Load Balancer Controller, updates the kubeconfig, and deploys the controller using Helm.
 - Finally, it deploys the metrics-server and creates a Kubernetes namespace for the application.
 
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |

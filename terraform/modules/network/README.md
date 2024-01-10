@@ -7,6 +7,34 @@
 - Route Tables
 - Security Groups
 
+This Terraform module creates a VPC with public and private subnets, an internet gateway,
+a NAT gateway, route tables, and security groups.
+
+Resources:
+- aws\_vpc: Creates a VPC with the specified CIDR block and enables DNS support and hostnames.
+- aws\_internet\_gateway: Creates an internet gateway and attaches it to the VPC.
+- aws\_eip: Creates an Elastic IP for the NAT gateway.
+- aws\_nat\_gateway: Creates a NAT gateway in the public subnet and associates it with the Elastic IP.
+- aws\_subnet: Creates public and private subnets within the VPC.
+- aws\_route\_table: Creates route tables for the public and private subnets.
+- aws\_route: Creates routes in the route tables to allow traffic to flow through the internet gateway and NAT gateway.
+- aws\_route\_table\_association: Associates the subnets with the route tables.
+- aws\_security\_group: Creates a default security group for the VPC.
+
+Inputs:
+- vpc\_cidr: The CIDR block for the VPC.
+- vpc\_name: The name of the VPC.
+- cluster\_name: The name of the Kubernetes cluster.
+- environment: The environment name.
+- public\_subnets\_cidr: A list of CIDR blocks for the public subnets.
+- private\_subnets\_cidr: A list of CIDR blocks for the private subnets.
+- availability\_zones: A list of availability zones.
+- tags: Additional tags to apply to the resources.
+
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -54,7 +82,11 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_default_sg_id"></a> [default\_sg\_id](#output\_default\_sg\_id) | The ID of the default security group |
+| <a name="output_internet_gateway_id"></a> [internet\_gateway\_id](#output\_internet\_gateway\_id) | The ID of the created Internet Gateway |
+| <a name="output_private_subnets_cidr_block"></a> [private\_subnets\_cidr\_block](#output\_private\_subnets\_cidr\_block) | The CIDR block list of the private subnet |
 | <a name="output_private_subnets_id"></a> [private\_subnets\_id](#output\_private\_subnets\_id) | The ID list of the private subnet |
+| <a name="output_public_subnets_cidr_block"></a> [public\_subnets\_cidr\_block](#output\_public\_subnets\_cidr\_block) | The CIDR block list of the public subnet |
 | <a name="output_public_subnets_id"></a> [public\_subnets\_id](#output\_public\_subnets\_id) | The ID list of the public subnet |
 | <a name="output_security_groups_ids"></a> [security\_groups\_ids](#output\_security\_groups\_ids) | The ID list of the security groups |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | The ID of the VPC |
+<!-- END_TF_DOCS -->
