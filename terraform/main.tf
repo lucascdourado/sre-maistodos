@@ -70,7 +70,7 @@ module "aurora" {
   engine_version             = "15.3"
   database_name              = "metabase"
   master_username            = "metabase"
-  db_subnet_group            = [module.network.public_subnets_id[0], module.network.public_subnets_id[1]]
+  db_subnet_group            = [module.network.private_subnets_id[0], module.network.private_subnets_id[1]]
   cluster_instances_reader   = 1
   publicly_accessible_reader = true
   cluster_instances_writer   = 1
