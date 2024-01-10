@@ -3,6 +3,11 @@ executors:
   terraform:
     docker:
       - image: hashicorp/terraform:0.12.24
+    environment:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+      TF_VAR_database_password: $METABASE_DATABASE_PASSWORD
 
 jobs:
   plan:
@@ -32,6 +37,9 @@ workflows:
   plan-approve-apply:
     jobs:
       - plan:
+          context: 
+            - aws-context
+            - metabase-context
           filters:
             branches:
               only: main
@@ -40,6 +48,9 @@ workflows:
           requires:
             - plan
       - apply:
+          context: 
+            - aws-context
+            - metabase-context
           requires:
             - approve
           filters:
