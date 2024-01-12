@@ -6,6 +6,8 @@
 - RDS Cluster Security Group
 - RDS Cluster Autoscaling
 
+The password for the master DB user is generated using the random_password resource. The password is stored in AWS SSM Parameter Store whit the name `/aurora/<cluster_identifier>`.
+
 ## Requirements
 
 No requirements.
@@ -81,4 +83,3 @@ No modules.
 | <a name="output_aurora_cluster_port"></a> [aurora\_cluster\_port](#output\_aurora\_cluster\_port) | The cluster port |
 | <a name="output_database_name"></a> [database\_name](#output\_database\_name) | The name of the database |
 | <a name="output_database_username"></a> [database\_username](#output\_database\_username) | The username for the database |
-<!-- END_TF_DOCS -->

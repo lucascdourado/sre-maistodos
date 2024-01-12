@@ -89,4 +89,3 @@ No modules.
 | <a name="output_public_subnets_id"></a> [public\_subnets\_id](#output\_public\_subnets\_id) | The ID list of the public subnet |
 | <a name="output_security_groups_ids"></a> [security\_groups\_ids](#output\_security\_groups\_ids) | The ID list of the security groups |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | The ID of the VPC |
-<!-- END_TF_DOCS -->
