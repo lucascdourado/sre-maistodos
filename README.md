@@ -11,9 +11,13 @@ When structuring your infrastructure and application projects, it's a recommende
 - **Example Directory Structure:**
     ```plaintext
     /helm
-        /charts
-        Chart.yaml
-        values.yaml
+        /aws
+            /templates
+            Chart.yaml
+        /metabase
+            /templates
+            Chart.yaml
+            values.yaml
 ## 2. Terraform
 
 - **Purpose:** Contains Terraform code to provision and manage the infrastructure needed for your application.
@@ -22,10 +26,10 @@ When structuring your infrastructure and application projects, it's a recommende
     ```plaintext
     /terraform
         /modules
-        /environments
         main.tf
         variables.tf
         outputs.tf
+        provider.tf
 # Advantages
 
 - **Focused Management:** Each repository deals with a specific concern, making it easier to understand, update, and maintain the code.
